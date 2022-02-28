@@ -1056,7 +1056,7 @@ class GLM(BaseEstimator):
         check_is_fitted(self, 'is_fitted_')
 
         if self.distr in ['binomial', 'probit']:
-            return self._predict_proba(X)
+            return np.stack((1-self._predict_proba(X), self._predict_proba(X)), axis=1)
         else:
             warnings.warn('This is only applicable for \
                            the binomial distribution. \
